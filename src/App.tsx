@@ -11,25 +11,11 @@ import './styles/sidebar.scss';
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
-  const [movies, setMovies] = useState<MovieProps[]>([]);
-  const [genres, setGenres] = useState<GenreResponseProps[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>(
     {} as GenreResponseProps
   );
 
   useEffect(() => {
-    api.get<GenreResponseProps[]>('genres').then((response) => {
-      setGenres(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    api
-      .get<MovieProps[]>(`movies/?Genre_id=${selectedGenreId}`)
-      .then((response) => {
-        setMovies(response.data);
-      });
-
     api
       .get<GenreResponseProps>(`genres/${selectedGenreId}`)
       .then((response) => {
@@ -39,12 +25,11 @@ export function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <SideBar
-        genres={genres}
-        selected={selectedGenreId}
-        setSelected={setSelectedGenreId}
+      <SideBar selected={selectedGenreId} setSelected={setSelectedGenreId} />
+      <Content
+        selectedGenre={selectedGenre}
+        selectedGenreId={selectedGenreId}
       />
-      <Content movies={movies} selectedGenre={selectedGenre} />
     </div>
   );
 }
