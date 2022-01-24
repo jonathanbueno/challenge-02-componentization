@@ -16,8 +16,3 @@ export interface GenreResponseProps {
   name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
   title: string;
 }
-
-export interface ContentProps {
-  movies: Array<MovieProps>;
-  selectedGenre: GenreResponseProps;
-}

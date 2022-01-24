@@ -1,7 +1,12 @@
 import { MovieCard } from '../components/MovieCard';
-import { ContentProps, MovieProps } from '../@types/custom';
+import { GenreResponseProps, MovieProps } from '../@types/custom';
 
 import '../styles/content.scss';
+
+interface ContentProps {
+  movies: Array<MovieProps>;
+  selectedGenre: GenreResponseProps;
+}
 
 export function Content(props: ContentProps) {
   return (
